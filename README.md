@@ -33,48 +33,43 @@ This project demonstrates the full observability and incident response lifecycle
 ## 🏛 Architecture Overview
 
 ```mermaid
-flowchart LR
-    subgraph AWS ["☁️ Amazon Web Services (AWS)"]
-        subgraph EC2 ["🖥️ EC2 Instance: datadog-monitoring-lab"]
-            direction TB
-            OS["Linux Kernel & System Resources"]
-            Stress["Load Generator (stress-ng)"]
-            DDAgent["Datadog Agent v7 (systemd service)"]
-            
-            OS -->|Telemetry: CPU, Load, RAM, Disk| DDAgent
-            Stress -.->|Simulated High CPU Spike| OS
-        end
+flowchart TD
+    subgraph AWS["Amazon Web Services (AWS)"]
+        direction TB
+        EC2["EC2 Instance (datadog-monitoring-lab)"]
+        Stress["Load Generator (stress-ng)"]
+        DDAgent["Datadog Agent v7 Daemon"]
+        
+        Stress -->|CPU Stress| EC2
+        EC2 -->|System Metrics| DDAgent
     end
 
-    subgraph DDCloud ["🟣 Datadog Observability Cloud (Site: us5)"]
+    subgraph Datadog["Datadog Observability Cloud (US5)"]
         direction TB
-        Ingest["Telemetry Ingestion & Processing Engine"]
+        Ingest["Telemetry Ingestion"]
         Dashboard["EC2 Infrastructure Monitoring Dashboard"]
-        Monitor["Monitor: EC2 - High CPU Usage"]
+        Monitor["Monitor (EC2 - High CPU Usage)"]
         
         Ingest --> Dashboard
         Ingest --> Monitor
     end
 
-    subgraph Alerting ["🚨 Multi-Tier Threshold & Notification Pipeline"]
+    subgraph Alerting["Alert Evaluation & Notifications"]
         direction TB
-        StateOK["Status: OK (< 60%)"]
-        StateWarn["Status: WARN (60% - 85%)"]
-        StateAlert["Status: ALERT (> 85%)"]
-        StateRecover["Auto-Recovery (<= 60%)"]
+        Warn["WARN State: CPU between 60% and 85%"]
+        Alert["ALERT State: CPU above 85%"]
+        Recover["RECOVERY State: CPU returns below 60%"]
+        Email["Email Notifications (@mayursureshnair@gmail.com)"]
         
-        EmailChannel["✉️ Email Notification Dispatch\n(@mayursureshnair@gmail.com)"]
+        Warn --> Email
+        Alert --> Email
+        Recover --> Email
     end
 
-    DDAgent -->|HTTPS (Outbound TLS 443)| Ingest
-    Monitor --> StateOK
-    Monitor --> StateWarn
-    Monitor --> StateAlert
-    StateAlert --> StateRecover
-    
-    StateWarn -.->|Trigger Warn Email| EmailChannel
-    StateAlert -.->|Trigger Alert Email| EmailChannel
-    StateRecover -.->|Trigger Recovery Email| EmailChannel
+    DDAgent -->|HTTPS Outbound TLS 443| Ingest
+    Monitor --> Warn
+    Monitor --> Alert
+    Monitor --> Recover
 ```
 
 ---
@@ -136,16 +131,7 @@ Verified that the service was properly enabled and running via `systemctl`:
 sudo systemctl status datadog-agent
 ```
 
-Output confirmed that the agent daemon and `agent-data-plane` were running actively with minimal resource overhead (~151 MB memory footprint).
-
-```text
-● datadog-agent.service - Datadog Agent
-     Loaded: loaded (/usr/lib/systemd/system/datadog-agent.service; enabled; preset: enabled)
-     Active: active (running) since Sat 2026-10-17 08:10:47 UTC
-   Main PID: 2261 (agent)
-      Tasks: 26 (limit: 627)
-     Memory: 151.4M (peak: 154.1M)
-```
+The service status was verified to be actively running with the agent daemon and data-plane processes under systemd supervision:
 
 ![Datadog Agent Running Status](screenshots/03-agent-service-running.png)
 
@@ -240,12 +226,6 @@ As sustained load surpassed the 85% threshold at 14:08 UTC, the monitor escalate
 
 #### Stage 4: Incident Mitigation (Stopping Stressors)
 The simulated incident was resolved by terminating the `stress-ng` process using `Ctrl + C` after a 7-minute sustained stress run:
-
-```bash
-^Cstress-ng: info: [3784] stopping 2 stressors
-stress-ng: info: [3784] passed: 2: cpu (2)
-stress-ng: info: [3784] successful run completed in 7 mins 8.22 secs
-```
 
 ![Stress Stopped Terminal](screenshots/11-stress-completed-interrupted.png)
 
