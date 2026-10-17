@@ -26,45 +26,9 @@ This project demonstrates the full observability and incident response lifecycle
 
 ## 🏛 Architecture Overview
 
-```mermaid
-flowchart TD
-    subgraph AWS["Amazon Web Services (AWS)"]
-        direction TB
-        EC2["EC2 Instance (datadog-monitoring-lab)"]
-        Stress["Load Generator (stress-ng)"]
-        DDAgent["Datadog Agent v7 Daemon"]
-        
-        Stress -->|CPU Stress| EC2
-        EC2 -->|System Metrics| DDAgent
-    end
-
-    subgraph Datadog["Datadog Observability Cloud (US5)"]
-        direction TB
-        Ingest["Telemetry Ingestion"]
-        Dashboard["EC2 Infrastructure Monitoring Dashboard"]
-        Monitor["Monitor (EC2 - High CPU Usage)"]
-        
-        Ingest --> Dashboard
-        Ingest --> Monitor
-    end
-
-    subgraph Alerting["Alert Evaluation & Notifications"]
-        direction TB
-        Warn["WARN State: CPU between 60% and 85%"]
-        Alert["ALERT State: CPU above 85%"]
-        Recover["RECOVERY State: CPU returns below 60%"]
-        Email["Email Notifications (@mayursureshnair@gmail.com)"]
-        
-        Warn --> Email
-        Alert --> Email
-        Recover --> Email
-    end
-
-    DDAgent -->|HTTPS Outbound TLS 443| Ingest
-    Monitor --> Warn
-    Monitor --> Alert
-    Monitor --> Recover
-```
+<p align="center">
+  <img src="screenshots/architecture-diagram.png" alt="AWS EC2 &amp; Datadog Observability Architecture" width="100%">
+</p>
 
 ---
 
@@ -287,7 +251,8 @@ The automated recovery notification included a rendered snapshot of the metric's
 ```text
 datadog-ec2-monitoring/
 ├── README.md                               # Complete project documentation & walkthrough
-└── screenshots/                            # 15 visual evidence & dashboard telemetry captures
+└── screenshots/                            # Visual evidence & architecture captures
+    ├── architecture-diagram.png            # High-resolution system architecture diagram
     ├── 01-ec2-instance-details.png         # AWS EC2 Management Console details
     ├── 02-datadog-agent-setup.png          # Datadog Agent installation guide UI
     ├── 03-agent-service-running.png        # systemctl agent active status verification

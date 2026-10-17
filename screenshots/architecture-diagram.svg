@@ -1,0 +1,185 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 580" width="1200" height="580" style="background:#0d1117; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#58a6ff"/>
+      <stop offset="100%" stop-color="#bc8cff"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#58a6ff" />
+    </marker>
+  </defs>
+
+  <!-- Canvas Outer Border -->
+  <rect x="15" y="15" width="1170" height="550" rx="16" fill="#161b22" stroke="#30363d" stroke-width="1.5" filter="url(#shadow)"/>
+
+  <!-- Title & Subtitle -->
+  <text x="600" y="55" text-anchor="middle" font-size="22" font-weight="700" fill="#f0f6fc" letter-spacing="-0.3">AWS EC2 &amp; Datadog Infrastructure Observability Architecture</text>
+  <text x="600" y="78" text-anchor="middle" font-size="13" font-weight="400" fill="#8b949e">Telemetry Streaming, Dynamic Dashboarding, Multi-Tier Alerting, &amp; Incident Verification</text>
+
+  <!-- ================= SECTION 1: AWS EC2 ================= -->
+  <g transform="translate(40, 105)">
+    <!-- Column Card -->
+    <rect x="0" y="0" width="310" height="425" rx="12" fill="#0d1117" stroke="#30363d" stroke-width="1.5"/>
+    
+    <!-- Column Header -->
+    <rect x="15" y="15" width="32" height="32" rx="8" fill="#ff9900"/>
+    <text x="31" y="37" text-anchor="middle" font-size="18">☁️</text>
+    <text x="58" y="32" font-size="15" font-weight="700" fill="#f0f6fc">AWS EC2 Infrastructure</text>
+    <text x="58" y="47" font-size="11" font-weight="400" fill="#8b949e">Target Compute Environment</text>
+    <line x1="15" y1="58" x2="295" y2="58" stroke="#21262d" stroke-width="1"/>
+
+    <!-- Box 1: Host Specs -->
+    <g transform="translate(15, 72)">
+      <rect x="0" y="0" width="280" height="98" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <text x="12" y="24" font-size="13" font-weight="700" fill="#e6edf3">datadog-monitoring-lab</text>
+      <rect x="190" y="10" width="78" height="18" rx="4" fill="#ff9900" fill-opacity="0.15" stroke="#ff9900" stroke-opacity="0.3"/>
+      <text x="229" y="23" text-anchor="middle" font-size="9" font-weight="700" fill="#ff9900">EC2 LINUX</text>
+      
+      <text x="12" y="46" font-size="11" fill="#8b949e">• ID: <tspan fill="#c9d1d9">i-02bc3e68d9e4a33f2</tspan></text>
+      <text x="12" y="64" font-size="11" fill="#8b949e">• Public IPv4: <tspan fill="#c9d1d9">18.209.4.110</tspan></text>
+      <text x="12" y="82" font-size="11" fill="#8b949e">• Private IPv4: <tspan fill="#c9d1d9">172.31.23.61</tspan></text>
+    </g>
+
+    <!-- Box 2: Stress Simulator -->
+    <g transform="translate(15, 185)">
+      <rect x="0" y="0" width="280" height="98" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <text x="12" y="24" font-size="13" font-weight="700" fill="#e6edf3">stress-ng Load Generator</text>
+      <rect x="180" y="10" width="88" height="18" rx="4" fill="#d29922" fill-opacity="0.15" stroke="#d29922" stroke-opacity="0.3"/>
+      <text x="224" y="23" text-anchor="middle" font-size="9" font-weight="700" fill="#d29922">SYNTHETIC LOAD</text>
+      
+      <text x="12" y="46" font-size="11" fill="#8b949e">• Dispatches 2 CPU stress hogs</text>
+      <text x="12" y="64" font-size="11" fill="#8b949e">• 100% Core Compute Saturation</text>
+      <text x="12" y="82" font-size="11" fill="#8b949e">• Sandbox Path: <tspan fill="#c9d1d9">/tmp/stress-ng</tspan></text>
+    </g>
+
+    <!-- Box 3: Agent Daemon -->
+    <g transform="translate(15, 298)">
+      <rect x="0" y="0" width="280" height="108" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <text x="12" y="24" font-size="13" font-weight="700" fill="#e6edf3">Datadog Agent v7</text>
+      <rect x="180" y="10" width="88" height="18" rx="4" fill="#a371f7" fill-opacity="0.15" stroke="#a371f7" stroke-opacity="0.3"/>
+      <text x="224" y="23" text-anchor="middle" font-size="9" font-weight="700" fill="#a371f7">SYSTEMD SERVICE</text>
+      
+      <text x="12" y="46" font-size="11" fill="#8b949e">• Telemetry: CPU, Load, RAM, Disk</text>
+      <text x="12" y="64" font-size="11" fill="#8b949e">• Footprint: ~151 MB memory</text>
+      <text x="12" y="82" font-size="11" fill="#8b949e">• Supervision: <tspan fill="#3fb950">Active / Enabled</tspan></text>
+      <text x="12" y="98" font-size="10" fill="#7ee787">● agent-data-plane verified</text>
+    </g>
+  </g>
+
+  <!-- Connector 1 (AWS -> Datadog Cloud) -->
+  <g transform="translate(355, 305)">
+    <line x1="0" y1="0" x2="80" y2="0" stroke="#58a6ff" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+    <text x="40" y="-12" text-anchor="middle" font-size="10" font-weight="600" fill="#58a6ff">HTTPS (TLS 443)</text>
+    <text x="40" y="16" text-anchor="middle" font-size="9.5" fill="#8b949e">Metrics Stream</text>
+  </g>
+
+  <!-- ================= SECTION 2: DATADOG CLOUD ================= -->
+  <g transform="translate(440, 105)">
+    <!-- Column Card -->
+    <rect x="0" y="0" width="315" height="425" rx="12" fill="#0d1117" stroke="#30363d" stroke-width="1.5"/>
+    
+    <!-- Column Header -->
+    <rect x="15" y="15" width="32" height="32" rx="8" fill="#632ca6"/>
+    <text x="31" y="37" text-anchor="middle" font-size="18">🟣</text>
+    <text x="58" y="32" font-size="15" font-weight="700" fill="#f0f6fc">Datadog Cloud (US5)</text>
+    <text x="58" y="47" font-size="11" font-weight="400" fill="#8b949e">Observability Platform (us5.datadoghq.com)</text>
+    <line x1="15" y1="58" x2="300" y2="58" stroke="#21262d" stroke-width="1"/>
+
+    <!-- Box 1: Ingestion Engine -->
+    <g transform="translate(15, 72)">
+      <rect x="0" y="0" width="285" height="98" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <text x="12" y="24" font-size="13" font-weight="700" fill="#e6edf3">Telemetry Ingestion Engine</text>
+      <rect x="210" y="10" width="62" height="18" rx="4" fill="#a371f7" fill-opacity="0.15" stroke="#a371f7" stroke-opacity="0.3"/>
+      <text x="241" y="23" text-anchor="middle" font-size="9" font-weight="700" fill="#a371f7">ENV: DEV</text>
+      
+      <text x="12" y="46" font-size="11" fill="#8b949e">• Continuous metric processing</text>
+      <text x="12" y="64" font-size="11" fill="#8b949e">• Time-series metric aggregation</text>
+      <text x="12" y="82" font-size="11" fill="#8b949e">• Site: <tspan fill="#c9d1d9">us5.datadoghq.com</tspan></text>
+    </g>
+
+    <!-- Box 2: Custom Dashboard -->
+    <g transform="translate(15, 185)">
+      <rect x="0" y="0" width="285" height="98" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <text x="12" y="24" font-size="13" font-weight="700" fill="#e6edf3">EC2 Infrastructure Dashboard</text>
+      <rect x="215" y="10" width="57" height="18" rx="4" fill="#58a6ff" fill-opacity="0.15" stroke="#58a6ff" stroke-opacity="0.3"/>
+      <text x="243" y="23" text-anchor="middle" font-size="9" font-weight="700" fill="#58a6ff">LIVE UI</text>
+      
+      <text x="12" y="46" font-size="11" fill="#8b949e">• CPU Utilization (%)</text>
+      <text x="12" y="64" font-size="11" fill="#8b949e">• System Load (1-min run queue)</text>
+      <text x="12" y="82" font-size="11" fill="#8b949e">• Memory Used (MiB) &amp; Disk Usage (%)</text>
+    </g>
+
+    <!-- Box 3: Metric Monitor -->
+    <g transform="translate(15, 298)">
+      <rect x="0" y="0" width="285" height="108" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <text x="12" y="24" font-size="13" font-weight="700" fill="#e6edf3">EC2 - High CPU Usage</text>
+      <rect x="195" y="10" width="77" height="18" rx="4" fill="#a371f7" fill-opacity="0.15" stroke="#a371f7" stroke-opacity="0.3"/>
+      <text x="233" y="23" text-anchor="middle" font-size="9" font-weight="700" fill="#a371f7">MONITOR</text>
+      
+      <text x="12" y="46" font-size="11" fill="#8b949e">• Query: <tspan fill="#e6edf3" font-family="monospace" font-size="10">system.cpu.user</tspan></text>
+      <text x="12" y="64" font-size="11" fill="#8b949e">• Scope: <tspan fill="#c9d1d9">host:i-02bc3e68d9e4a33f2</tspan></text>
+      <text x="12" y="82" font-size="11" fill="#8b949e">• Window: <tspan fill="#c9d1d9">Rolling 5m Average</tspan></text>
+      <text x="12" y="98" font-size="10" fill="#a371f7">⚡ Auto-evaluates state transitions</text>
+    </g>
+  </g>
+
+  <!-- Connector 2 (Datadog -> Alerting) -->
+  <g transform="translate(760, 305)">
+    <line x1="0" y1="0" x2="75" y2="0" stroke="#f85149" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+    <text x="38" y="-12" text-anchor="middle" font-size="10" font-weight="600" fill="#f85149">Triggers</text>
+    <text x="38" y="16" text-anchor="middle" font-size="9.5" fill="#8b949e">Alert Rules</text>
+  </g>
+
+  <!-- ================= SECTION 3: ALERTING & INCIDENT ================= -->
+  <g transform="translate(840, 105)">
+    <!-- Column Card -->
+    <rect x="0" y="0" width="315" height="425" rx="12" fill="#0d1117" stroke="#30363d" stroke-width="1.5"/>
+    
+    <!-- Column Header -->
+    <rect x="15" y="15" width="32" height="32" rx="8" fill="#ea4335"/>
+    <text x="31" y="37" text-anchor="middle" font-size="18">🚨</text>
+    <text x="58" y="32" font-size="15" font-weight="700" fill="#f0f6fc">Incident &amp; Alert Pipeline</text>
+    <text x="58" y="47" font-size="11" font-weight="400" fill="#8b949e">Multi-Tier Threshold Automation</text>
+    <line x1="15" y1="58" x2="300" y2="58" stroke="#21262d" stroke-width="1"/>
+
+    <!-- Box 1: Warning State -->
+    <g transform="translate(15, 72)">
+      <rect x="0" y="0" width="285" height="98" rx="8" fill="#161b22" stroke="#d29922" stroke-width="1" stroke-opacity="0.4"/>
+      <text x="12" y="24" font-size="13" font-weight="700" fill="#d29922">🟡 Warning State</text>
+      <rect x="180" y="10" width="92" height="18" rx="4" fill="#d29922" fill-opacity="0.2"/>
+      <text x="226" y="23" text-anchor="middle" font-size="9" font-weight="700" fill="#d29922">60% &lt; CPU &lt;= 85%</text>
+      
+      <text x="12" y="46" font-size="11" fill="#8b949e">• Initial anomaly detection</text>
+      <text x="12" y="64" font-size="11" fill="#8b949e">• Dispatches: <tspan fill="#e6edf3">Warn: EC2 - High CPU</tspan></text>
+      <text x="12" y="82" font-size="11" fill="#d29922">✉️ Sent to @mayursureshnair@gmail.com</text>
+    </g>
+
+    <!-- Box 2: Alert State -->
+    <g transform="translate(15, 185)">
+      <rect x="0" y="0" width="285" height="98" rx="8" fill="#161b22" stroke="#f85149" stroke-width="1" stroke-opacity="0.5"/>
+      <text x="12" y="24" font-size="13" font-weight="700" fill="#f85149">🔴 Critical Alert State</text>
+      <rect x="195" y="10" width="77" height="18" rx="4" fill="#f85149" fill-opacity="0.2"/>
+      <text x="233" y="23" text-anchor="middle" font-size="9" font-weight="700" fill="#f85149">CPU &gt; 85%</text>
+      
+      <text x="12" y="46" font-size="11" fill="#8b949e">• Sustained saturation trigger</text>
+      <text x="12" y="64" font-size="11" fill="#8b949e">• Dispatches: <tspan fill="#e6edf3">Triggered: EC2 - High CPU</tspan></text>
+      <text x="12" y="82" font-size="11" fill="#f85149">✉️ Urgent incident escalation</text>
+    </g>
+
+    <!-- Box 3: Recovery State -->
+    <g transform="translate(15, 298)">
+      <rect x="0" y="0" width="285" height="108" rx="8" fill="#161b22" stroke="#2ea043" stroke-width="1" stroke-opacity="0.5"/>
+      <text x="12" y="24" font-size="13" font-weight="700" fill="#3fb950">🟢 Automatic Recovery</text>
+      <rect x="190" y="10" width="82" height="18" rx="4" fill="#2ea043" fill-opacity="0.2"/>
+      <text x="231" y="23" text-anchor="middle" font-size="9" font-weight="700" fill="#3fb950">CPU &lt;= 60.0%</text>
+      
+      <text x="12" y="46" font-size="11" fill="#8b949e">• Evaluated recovery: <tspan fill="#3fb950" font-weight="700">41.68% avg</tspan></text>
+      <text x="12" y="64" font-size="11" fill="#8b949e">• Dispatches: <tspan fill="#e6edf3">Recovered: EC2 - High CPU</tspan></text>
+      <text x="12" y="82" font-size="11" fill="#8b949e">• Includes embedded Datadog snapshot</text>
+      <text x="12" y="98" font-size="10" fill="#3fb950">✓ System returned to baseline OK</text>
+    </g>
+  </g>
+</svg>
