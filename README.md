@@ -1,11 +1,5 @@
 # 🚀 AWS EC2 Infrastructure Observability & Real-Time Alerting with Datadog
 
-[![AWS EC2](https://img.shields.io/badge/AWS-EC2-FF9900?logo=amazonec2&logoColor=white)](https://aws.amazon.com/ec2/)
-[![Datadog Agent](https://img.shields.io/badge/Datadog-Agent_v7-632CA6?logo=datadog&logoColor=white)](https://www.datadoghq.com/)
-[![Alerts](https://img.shields.io/badge/Alerting-Email_%26_Push-EA4335?logo=gmail&logoColor=white)]()
-[![Environment](https://img.shields.io/badge/Environment-dev-007ACC)]()
-[![Status](https://img.shields.io/badge/Observability-Verified_%26_Active-success)]()
-
 A comprehensive, end-to-end cloud infrastructure monitoring and automated alerting solution implemented on an **AWS EC2 Linux instance** using the **Datadog Agent v7**. 
 
 This project demonstrates the full observability and incident response lifecycle: from custom telemetry dashboards and multi-tier alert threshold configuration to synthetic CPU load injection using `stress-ng`, automated multi-channel email notifications, and automated recovery verification.
