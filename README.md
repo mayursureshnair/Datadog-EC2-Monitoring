@@ -6,24 +6,6 @@ This project demonstrates the full observability and incident response lifecycle
 
 ---
 
-## 📑 Table of Contents
-- [Architecture Overview](#-architecture-overview)
-- [Target Environment & Infrastructure Specs](#-target-environment--infrastructure-specs)
-- [Project Highlights](#-project-highlights)
-- [Step-by-Step Implementation](#-step-by-step-implementation)
-  - [1. Host Provisioning & Connect](#1-host-provisioning--connect)
-  - [2. Datadog Agent v7 Installation](#2-datadog-agent-v7-installation)
-  - [3. Custom Dashboard Design (`EC2 Infrastructure Monitoring`)](#3-custom-dashboard-design-ec2-infrastructure-monitoring)
-  - [4. Multi-Tier Alert Monitor Configuration (`EC2 - High CPU Usage`)](#4-multi-tier-alert-monitor-configuration-ec2---high-cpu-usage)
-  - [5. Stress Testing & Anomaly Simulation (`stress-ng`)](#5-stress-testing--anomaly-simulation-stress-ng)
-  - [6. Incident Lifecycle & Telemetry Response](#6-incident-lifecycle--telemetry-response)
-  - [7. Automated Email Alerting & Notification Pipeline](#7-automated-email-alerting--notification-pipeline)
-- [Incident Progression & Timeline Audit](#-incident-progression--timeline-audit)
-- [Troubleshooting & Key Learnings](#-troubleshooting--key-learnings)
-- [Repository Structure](#-repository-structure)
-
----
-
 ## 🏛 Architecture Overview
 
 <p align="center">
